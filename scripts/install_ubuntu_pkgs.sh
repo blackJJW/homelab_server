@@ -5,72 +5,82 @@ set -e
 
 sudo apt-get update
 
+# Install Development Tools
 sudo apt-get install -y \
-    # Development tools
-    build-essential   # Essential tools for building software (compiler, linker, etc.)
-    cmake             # Cross-platform build system for compiling and building software
-    make              # Build automation tool for compiling and linking programs
-    gdb               # GNU Debugger for debugging C/C++ programs
+    build-essential \
+    cmake \
+    make \
+    gdb
 
-    # Networking tools
-    net-tools         # Tools for networking (ifconfig, netstat, etc.)
-    curl              # Command-line tool for transferring data with URLs
-    wget              # Command-line utility to download files from the web
-    traceroute        # Traces the route packets take to a network host
-    nmap              # Network mapper for security auditing and network discovery
-    dnsutils          # DNS lookup utilities (e.g., dig, nslookup)
+# Install Networking Tools
+sudo apt-get install -y \
+    net-tools \
+    curl \
+    wget \
+    traceroute \
+    nmap \
+    dnsutils
 
-    # Version control
-    git               # Version control system for managing code repositories
+# Install Version Control
+sudo apt-get install -y \
+    git
 
-    # Terminal utilities
-    tmux              # Terminal multiplexer for managing multiple terminal sessions
-    vim               # Popular text editor for editing code and config files
-    nano              # Lightweight terminal text editor
-    htop              # Interactive process viewer, an enhanced version of `top`
-    tree              # Display directory structures in a tree-like format
+# Install Terminal Utilities
+sudo apt-get install -y \
+    tmux \
+    vim \
+    nano \
+    htop \
+    tree
 
-    # Archiving and compression
-    zip               # Utility for creating zip archives
-    unzip             # Utility for extracting files from zip archives
-    tar               # Archive utility for .tar files
-    p7zip-full        # Full version of 7zip, a high compression utility
+# Install Archiving and Compression Tools
+sudo apt-get install -y \
+    zip \
+    unzip \
+    tar \
+    p7zip-full
 
-    # Text processing
-    sed               # Stream editor for processing and transforming text
-    awk               # Text pattern scanning and processing tool
-    jq                # Lightweight tool for processing JSON files
+# Install Text Processing Tools
+sudo apt-get install -y \
+    sed \
+    awk \
+    jq
 
-    # System monitoring and troubleshooting
-    sysstat           # Performance monitoring tools (e.g., sar, iostat)
-    iotop             # Displays I/O usage by processes
-    lsof              # Lists open files by processes
-    strace            # Trace system calls and signals
+# Install System Monitoring and Troubleshooting Tools
+sudo apt-get install -y \
+    sysstat \
+    iotop \
+    lsof \
+    strace
 
-    # Disk and filesystem management
-    parted            # Disk partition management tool
-    fdisk             # Partition table manipulator
-    ncdu              # Disk usage analyzer with a ncurses interface
+# Install Disk and Filesystem Management Tools
+sudo apt-get install -y \
+    parted \
+    fdisk \
+    ncdu
 
-    # Security and cryptography
-    gnupg             # GNU Privacy Guard for encryption and signing
-    openssh-client    # SSH client for secure remote connections
-    fail2ban          # Protects against brute-force attacks
-    ufw               # Uncomplicated Firewall for managing iptables
+# Install Security and Cryptography Tools
+sudo apt-get install -y \
+    gnupg \
+    openssh-client \
+    fail2ban \
+    ufw
 
-    # Programming languages and runtimes
-    python3           # Python programming language interpreter
-    python3-pip       # Python package manager
-    nodejs            # JavaScript runtime environment
-    npm               # Node.js package manager
+# Install Programming Languages and Runtimes
+sudo apt-get install -y \
+    python3 \
+    python3-pip \
+    nodejs \
+    npm
 
-    # Miscellaneous utilities
-    software-properties-common # Utility for managing apt repositories
-    apt-transport-https        # HTTPS support for APT
-    ca-certificates            # Manage CA certificates
-    locales                    # Manage and configure locales
-    bash-completion            # Command-line autocompletion for bash
-    whois                      # Provides Whois command for domain info
+# Install Miscellaneous Utilities
+sudo apt-get install -y \
+    software-properties-common \
+    apt-transport-https \
+    ca-certificates \
+    locales \
+    bash-completion \
+    whois
 
 # Apply alias for python3 to python
 echo "Applying alias for python3 as python..."
