@@ -7,6 +7,10 @@ set -e
 LOG_FILE="/var/log/update_upgrade.log"
 TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
 
+log_message() {
+    echo "[INFO] $(date): $1"
+}
+
 # Logging function
 update_and_upgrade() {
     log_message "Starting system update and upgrade..."
