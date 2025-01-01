@@ -3,98 +3,113 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-sudo apt-get update
+log_message() {
+    echo "[INFO] ${data}: $1"
+}
 
-# Install Development Tools
-sudo apt-get install -y \
-    build-essential \
-    cmake \
-    make \
-    gdb
+install_package() {
+    PACKAGE=$1
+    if dpkg -l | grep -qw "$PACKAGE"; then
+        log_message "$PACKAGE is already installed. Skipping..."
+    else
+        log_message "Installing $PACKAGE..."
+        sudo apt-get install -y "$PACKAGE"
+    fi
+}
 
-# Install Networking Tools
-sudo apt-get install -y \
-    net-tools \
-    curl \
-    wget \
-    traceroute \
-    nmap \
-    dnsutils
+install_virtual_package() {
+    PACKAGE=$1
+    CANDIDATE=$2
+    if dpkg -l | grep -qw "$CANDIDATE"; then
+        log_message "$CANDIDATE is already installed. Skipping."
+    else
+        log_message "Installing $CANDIDATE for virtual package $PACKAGE..."
+        sudo apt-get install -y "$CANDIDATE"
+    fi
+}
 
-# Install Version Control
-sudo apt-get install -y \
-    git
+# Update and upgrade the system
+log_message "Updating package lists and upgrading system..."
+sudo apt-get update && sudo apt-get upgrade -y
 
-# Install Terminal Utilities
-sudo apt-get install -y \
-    tmux \
-    vim \
-    nano \
-    htop \
-    tree
+# Development tools
+log_message "Installing development tools..."
+install_package build-essential
+install_package cmake
+install_package make
+install_package gdb
 
-# Install Archiving and Compression Tools
-sudo apt-get install -y \
-    zip \
-    unzip \
-    tar \
-    p7zip-full
+# Networking tools
+log_message "Installing networking tools..."
+install_package net-tools
+install_package curl
+install_package wget
+install_package traceroute
+install_package nmap
+install_package dnsutils
 
-# Install Text Processing Tools
-sudo apt-get install -y \
-    sed \
-    awk \
-    jq
+# Version control
+log_message "Installing version control tools..."
+install_package git
 
-# Install System Monitoring and Troubleshooting Tools
-sudo apt-get install -y \
-    sysstat \
-    iotop \
-    lsof \
-    strace
+# Terminal utilities
+log_message "Installing terminal utilities..."
+install_package tmux
+install_package vim
+install_package nano
+install_package htop
+install_package tree
 
-# Install Disk and Filesystem Management Tools
-sudo apt-get install -y \
-    parted \
-    fdisk \
-    ncdu
+# Archiving and compression
+log_message "Installing archiving and compression tools..."
+install_package zip
+install_package unzip
+install_package tar
+install_package p7zip-full
+install_package 7zip
 
-# Install Security and Cryptography Tools
-sudo apt-get install -y \
-    gnupg \
-    openssh-client \
-    fail2ban \
-    ufw
+# Text processing
+log_message "Installing text processing tools..."
+install_virtual_package awk gawk
+install_package sed
+install_package jq
 
-# Install Programming Languages and Runtimes
-sudo apt-get install -y \
-    python3 \
-    python3-pip \
-    nodejs \
-    npm
+# System monitoring and troubleshooting
+log_message "Installing system monitoring and troubleshooting tools..."
+install_package sysstat
+install_package iotop
+install_package lsof
+install_package strace
 
-# Install Miscellaneous Utilities
-sudo apt-get install -y \
-    software-properties-common \
-    apt-transport-https \
-    ca-certificates \
-    locales \
-    bash-completion \
-    whois
+# Disk and filesystem management
+log_message "Installing disk and filesystem management tools..."
+install_package parted
+install_package fdisk
+install_package ncdu
 
-# Apply alias for python3 to python
-echo "Applying alias for python3 as python..."
+# Security and cryptography
+log_message "Installing security and cryptography tools..."
+install_package gnupg
+install_package openssh-client
+install_package fail2ban
+install_package ufw
 
-if ! grep -q "alias python=" ~/.bashrc; then
-    echo "alias python=python3" >> ~/.bashrc
-    echo "Alias applied. Run 'source ~/.bashrc' to reload the shell."
-else
-    echo "Alias for python already exists in ~/.bashrc"
-fi
+# Programming languages and runtimes
+log_message "Installing programming languages and runtimes..."
+install_package python3
+install_package python3-pip
+install_package openjdk-11-jdk
+install_package nodejs
+install_package npm
 
-# Source the .bashrc to make the alias available immediately
-source ~/.bashrc
+# Miscellaneous utilities
+log_message "Installing miscellaneous utilities..."
+install_package software-properties-common
+install_package apt-transport-https
+install_package ca-certificates
+install_package locales
+install_package bash-completion
+install_package whois
 
-# Confirmation
-echo "Alias applied successfully. 'python' now points to:"
-python --version
+# Final message
+log_message "All packages installed successfully!"
