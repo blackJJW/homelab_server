@@ -10,8 +10,10 @@ The scripts in this directory are intended to:
 ## 2. Directory Structure
 ```plaintext
 /scripts
-├── update_upgrade.sh      # Updates and upgrades the system packages
-├── install_packages.sh    # Installs essential packages and tools
-├── install_docker.sh      # Installs docker
-└── README.md              # Documentation for the scripts directory
+├── install_pkgs/               # Subdirectory for package installation scripts
+│   ├── install_docker.sh       # Installs Docker and its dependencies
+│   ├── install_ubuntu_pkgs.sh  # Installs essential packages and tools for Ubuntu
+├── update_upgrade.sh           # Updates and upgrades the system packages
+├── setup_permissions.sh        # Configures permissions for scripts and logs
+└── README.md                   # Documentation for the scripts directory
 ```
